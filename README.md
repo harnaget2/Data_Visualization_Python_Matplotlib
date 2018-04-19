@@ -34,17 +34,17 @@ merged_cities["color"][merged_cities["type"] == "Rural"] = "gold"
 merged_cities
 ```
 
-    C:\Users\harna\Anaconda3\lib\site-packages\ipykernel_launcher.py:12: SettingWithCopyWarning: 
+    C:\Users\harna\Anaconda3\envs\PythonData\lib\site-packages\ipykernel_launcher.py:12: SettingWithCopyWarning: 
     A value is trying to be set on a copy of a slice from a DataFrame
     
     See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html#indexing-view-versus-copy
       if sys.path[0] == '':
-    C:\Users\harna\Anaconda3\lib\site-packages\ipykernel_launcher.py:13: SettingWithCopyWarning: 
+    C:\Users\harna\Anaconda3\envs\PythonData\lib\site-packages\ipykernel_launcher.py:13: SettingWithCopyWarning: 
     A value is trying to be set on a copy of a slice from a DataFrame
     
     See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html#indexing-view-versus-copy
       del sys.path[0]
-    C:\Users\harna\Anaconda3\lib\site-packages\ipykernel_launcher.py:14: SettingWithCopyWarning: 
+    C:\Users\harna\Anaconda3\envs\PythonData\lib\site-packages\ipykernel_launcher.py:14: SettingWithCopyWarning: 
     A value is trying to be set on a copy of a slice from a DataFrame
     
     See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html#indexing-view-versus-copy
@@ -55,17 +55,17 @@ merged_cities
 
 
 <div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
     }
 
     .dataframe tbody tr th {
         vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
     }
 </style>
 <table border="1" class="dataframe">
@@ -719,7 +719,7 @@ tot_rides = merged_cities["Num Riders"]
 avg_fare = merged_cities["Average Fare"]
 tot_fare = merged_cities["fare"]
 for x,y,c,lb in zip(tot_rides,avg_fare,color,label.index):
-    plt.scatter(tot_rides, avg_fare, s=tot_drivers, facecolors=color, edgecolors="black", alpha=.75)
+    plt.scatter(tot_rides, avg_fare, s=tot_drivers, facecolors=color, edgecolors="black", alpha=.5)
 
 plt.ylim(15, 50, 5)
 
@@ -727,10 +727,14 @@ type_1 = mpatches.Patch(color='lightskyblue', label='Suburban')
 type_2 = mpatches.Patch(color='lightcoral', label='Urban')
 type_3 = mpatches.Patch(color='gold', label='Rural')
 
-plt.legend(handles=[type_2, type_1, type_3], title="City Types", loc='best')
+leg=plt.legend(handles=[type_2, type_1, type_3], title="City Types", loc='best')
 plt.xlabel('Total Number of Rider (Per City)')
 plt.ylabel('Average Fare ($)')
 plt.title('Pyber Ride Sharing Data (2016)')
+for l in leg.get_lines():
+    l.set_alpha(0)
+    l.set_marker('.')
+plt.savefig('bubbleplot.png')
 plt.show()
 ```
 
@@ -751,6 +755,7 @@ explode = (0.1,0,0)
 plt.pie(data_1, explode=explode, labels=labels, autopct="%1.1f%%", shadow=True, startangle=220)
 plt.axis("equal")
 plt.title("% of fares by city type")
+plt.savefig('Pie1.png')
 plt.show()
 ```
 
@@ -768,6 +773,7 @@ explode = (0.1,0,0)
 plt.pie(data_2, explode=explode, labels=labels, autopct="%1.1f%%", shadow=True, startangle=220)
 plt.axis("equal")
 plt.title("% of total riders by city type")
+plt.savefig('Pie2.png')
 plt.show()
 ```
 
@@ -785,6 +791,7 @@ explode = (0.1,0,0)
 plt.pie(data_3, explode=explode, labels=labels, autopct="%1.1f%%", shadow=True, startangle=220)
 plt.axis("equal")
 plt.title("% of total drivers by city type")
+plt.savefig('Pie3.png')
 plt.show()
 ```
 
